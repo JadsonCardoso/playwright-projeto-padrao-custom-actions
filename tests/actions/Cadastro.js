@@ -23,13 +23,19 @@ export class Cadastro {
     async clicarCadastrar() {
         await this.page.locator('#btnRegister').click()
     }
-    
-    async validarCadastroSucesso(nome) {
-    await this.page.waitForLoadState('networkidle')
-    await expect(this.page.locator('#swal2-title')).toHaveText('Cadastro realizado!')
-    await expect(this.page.locator('#swal2-html-container')).toHaveText(`Bem-vindo ${nome}`)
-    await expect(this.page).toHaveURL(/.*my-account/)
-  }
 
+    async validarCadastroSucesso(nome) {
+        await this.page.waitForLoadState('networkidle')
+        await expect(this.page.locator('#swal2-title')).toHaveText('Cadastro realizado!')
+        await expect(this.page.locator('#swal2-html-container')).toHaveText(`Bem-vindo ${nome}`)
+        await this.clicarEmOk()
+
+        const logueUser = this.page.locator('#userLogged')
+        await expect(logueUser).toContainText(nome)
+    }
+    
+    async clicarEmOk() {
+        await this.page.getByText('OK').click()
+    }
 
 } 

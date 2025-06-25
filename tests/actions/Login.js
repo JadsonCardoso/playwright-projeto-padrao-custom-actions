@@ -6,30 +6,37 @@ export class Login {
         this.page = page
     }
 
-async acessarLogin() {
-    await this.page.goto('https://automationpratice.com.br/login');
-    await expect(this.page.locator('#btnLogin')).toHaveText('login')
-}
+    async fazerLogin(email, senha) {
+        await this.acessarLogin()
+        await this.preencherCampos(email, senha)
+        await this.clicarBotaoLogin()
+        await this.clicarEmOk()
+    }
 
-async preencherCampos(email, senha) {
-    await this.page.locator('#user').fill(email)
-    await this.page.locator('#password').fill(senha)
-}
+    async acessarLogin() {
+        await this.page.goto('https://automationpratice.com.br/login');
+        await expect(this.page.locator('#btnLogin')).toHaveText('login')
+    }
 
-async clicarBotaoLogin() {
-    await this.page.locator('#btnLogin').click()
-}
+    async preencherCampos(email, senha) {
+        await this.page.locator('#user').fill(email)
+        await this.page.locator('#password').fill(senha)
+    }
 
-async validarError(mensagemError) {
-    await expect(this.page.locator('//span[@class="invalid_input"]')).toHaveText(mensagemError)
-}
+    async clicarBotaoLogin() {
+        await this.page.locator('#btnLogin').click()
+    }
 
-async validarSucesso(mensagemSucesso, validarEmail) {
-    await expect(this.page.locator('#swal2-title')).toHaveText(mensagemSucesso)
-    await expect(this.page.locator('#swal2-html-container')).toHaveText(validarEmail)
-  }
+    async validarError(mensagemError) {
+        await expect(this.page.locator('//span[@class="invalid_input"]')).toHaveText(mensagemError)
+    }
 
-  async clicarEmOk() {
-    await this.page.getByText('OK').click()
-  }
+    async validarSucesso(mensagemSucesso, validarEmail) {
+        await expect(this.page.locator('#swal2-title')).toHaveText(mensagemSucesso)
+        await expect(this.page.locator('#swal2-html-container')).toHaveText(validarEmail)
+    }
+
+    async clicarEmOk() {
+        await this.page.getByText('OK').click()
+    }
 }

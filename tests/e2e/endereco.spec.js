@@ -3,18 +3,11 @@ import data from '../support/fixtures/endereco.json' assert { type: 'json' }
 import { faker } from '@faker-js/faker'
 
 test('Cadastrar de endereço', async ({ page }) => {
-
-    // Logando a aplicação
     const userEmail = faker.internet.email();
     const endereco = data.dados
 
-    await page.login.acessarLogin()
-
-    await page.login.preencherCampos(userEmail, '123654')
-    await page.login.clicarBotaoLogin()
-
-    await page.login.validarSucesso('Login realizado', `Olá, ${userEmail}`)
-    await page.login.clicarEmOk()
+    // Logando a aplicação
+    await page.login.fazerLogin(userEmail, '123456')
 
     // Acessando tela de cadastro de Enderaço
     await page.endereco.acessarCadastroEndereco()
@@ -22,23 +15,13 @@ test('Cadastrar de endereço', async ({ page }) => {
     // Cadastro
     await page.endereco.cadastrarEndereco(endereco.primeiro_nome, endereco.sobrenome, endereco.nome_da_empresa, endereco.email, endereco.pais, endereco.estado_cidade, endereco.cep, endereco.endereco_completo, endereco.notas_adicionais)
     await page.endereco.validarSucesso()
-    await page.waitForTimeout(5000)
-
-
 })
 
 test('Não dever cadastrar se os campos não forem preenchidos', async ({ page }) => {
-     // Logando a aplicação
+    // Logando a aplicação
     const userEmail = faker.internet.email();
-    const endereco = data.dados
 
-    await page.login.acessarLogin()
-
-    await page.login.preencherCampos(userEmail, '123654')
-    await page.login.clicarBotaoLogin()
-
-    await page.login.validarSucesso('Login realizado', `Olá, ${userEmail}`)
-    await page.login.clicarEmOk()
+    await page.login.fazerLogin(userEmail, '123456')
 
     // Acessando tela de cadastro de Enderaço
     await page.endereco.acessarCadastroEndereco()
@@ -56,7 +39,4 @@ test('Não dever cadastrar se os campos não forem preenchidos', async ({ page }
         'O campo Address deve ser prenchido',
         'O campo Additional Notes deve ser prenchido'
     ])
-
-    await page.waitForTimeout(1000)
-
 })
