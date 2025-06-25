@@ -1,0 +1,14 @@
+{
+  "dados": {
+    "primeiro_nome": "João",
+    "sobrenome": "Silva",
+    "nome_da_empresa": "TechSolutions",
+    "email": "joao.silva@techsolutions.com",
+    "pais": "usa",
+    "estado_cidade": "Aland Islands",
+    "cep": "01000-000",
+    "endereco_completo": "Av. Paulista, 1000 - Bela Vista, São Paulo - SP",
+    "notas_adicionais": "Cliente preferencial. Solicita entrega rápida."
+  }
+  
+}
