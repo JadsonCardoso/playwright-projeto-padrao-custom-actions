@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker'
 test('Cadastrar de endereço', async ({ page }) => {
     const userEmail = faker.internet.email();
     const endereco = data.dados
- 
+
     await page.login.fazerLogin(userEmail, '123456')
 
     await page.endereco.acessarCadastroEndereco()

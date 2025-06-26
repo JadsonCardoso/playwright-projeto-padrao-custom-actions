@@ -7,17 +7,26 @@ import { Endereco } from './actions/Endereco.js'
 import { Cadastro } from './actions/Cadastro.js'
 import { Components } from './actions/Components.js'
 
-const test = base.extend({ 
+import { Api } from './api/apiConfig.js'
+
+const test = base.extend({
     page: async ({ page }, use) => {
         const context = page
-        context['cadastro'] = new Cadastro(page) 
+        context['cadastro'] = new Cadastro(page)
         context['login'] = new Login(page)
         context['minhaConta'] = new MinhaConta(page)
         context['endereco'] = new Endereco(page)
         context['components'] = new Components(page)
 
-        await use(context) 
-    }
-  }) 
+        await use(context)
+    },
+    request: async ({ request }, use) => {
+        const context = request
 
-  export { test, expect } 
+        context['api'] = new Api(request)
+
+        await use(context)
+    }
+})
+
+export { test, expect } 
