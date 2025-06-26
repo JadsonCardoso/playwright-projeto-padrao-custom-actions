@@ -5,27 +5,21 @@ import { faker } from '@faker-js/faker'
 test('Cadastrar de endereço', async ({ page }) => {
     const userEmail = faker.internet.email();
     const endereco = data.dados
-
-    // Logando a aplicação
+ 
     await page.login.fazerLogin(userEmail, '123456')
 
-    // Acessando tela de cadastro de Enderaço
     await page.endereco.acessarCadastroEndereco()
-
     // Cadastro
     await page.endereco.cadastrarEndereco(endereco.primeiro_nome, endereco.sobrenome, endereco.nome_da_empresa, endereco.email, endereco.pais, endereco.estado_cidade, endereco.cep, endereco.endereco_completo, endereco.notas_adicionais)
     await page.endereco.validarSucesso()
+    await page.endereco.selecionarFormaPagamento()
 })
 
 test('Não dever cadastrar se os campos não forem preenchidos', async ({ page }) => {
-    // Logando a aplicação
     const userEmail = faker.internet.email();
-
     await page.login.fazerLogin(userEmail, '123456')
 
-    // Acessando tela de cadastro de Enderaço
     await page.endereco.acessarCadastroEndereco()
-
     await page.endereco.salvar()
 
     await page.components.validarMensagemError([

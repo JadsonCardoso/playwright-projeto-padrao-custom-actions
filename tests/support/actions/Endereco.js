@@ -11,7 +11,6 @@ export class Endereco {
   }
 
   async acessarCadastroEndereco() {
-    // Buscando elemento pelo escopo: caso fosse ID ficaria: #id .nomedaclasse
     await this.page.locator('.footer_one_widget > ul > li').getByText('Checkout View One').click()
   }
 
@@ -33,6 +32,14 @@ export class Endereco {
 
   }
 
+  async selecionarFormaPagamento() {
+
+    const condicaoParaClick = this.page.locator(' .heading_payment div[aria-expanded="false"]')
+
+    if (condicaoParaClick) { 
+    await this.page.locator('#javascript').click()
+    }
+  }
 
   async validarSucesso() {
     await expect(this.page.locator('.check-out-form > h3')).toHaveText('Billings Information registred with success!')
