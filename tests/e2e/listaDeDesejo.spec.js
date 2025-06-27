@@ -14,5 +14,13 @@ test('Adicionado produtos no carrrinho', async ({ page }) => {
 
     await page.listaDeDesejos.acessarListaDeDesejos()
     await page.listaDeDesejos.adicionarProdutoCarrinho()
-    await page.listaDeDesejos.validarAdicaoDeProduto()
+    await page.listaDeDesejos.validarAdicaoDeProduto('4')
+})
+
+test('Remover no carrrinho', async ({ page }) => {
+    await page.login.fazerLogin(userEmail, '123456')
+
+    await page.listaDeDesejos.acessarListaDeDesejos()
+    await page.listaDeDesejos.removerProdudo()
+    await page.listaDeDesejos.validarQuantDeProduto('3')
 })

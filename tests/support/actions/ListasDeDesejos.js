@@ -15,14 +15,24 @@ export class ListaDeDesejos {
     }
 
     async adicionarProdutoCarrinho() {
-        const addCart = this.page.locator('.product_addcart button[type="button"]').nth(1)
+        const addCart = await this.page.locator('.product_addcart button[type="button"]').nth(1)
         await addCart.click();
     }
 
-    async validarAdicaoDeProduto() {
+    async removerProdudo() {
+        const removerProd = await this.page.locator('.product_remove i[style="cursor: pointer;"]').nth(1)
+        await removerProd.click()
+    }
+
+    async validarAdicaoDeProduto(quantidadeProd) {
         await expect(this.page.locator('#swal2-title')).toHaveText('Success!')
         await expect(this.page.locator('#swal2-html-container')).toHaveText('Successfully added to your Cart')
-        await expect(this.page.locator('.item-count').nth(1)).toHaveText('4')
+        await expect(this.page.locator('.item-count').nth(1)).toHaveText()
+        this.validarQuantDeProduto(quantidadeProd) 
+    }
+
+    async validarQuantDeProduto(quantidadeProd) {
+        await expect(this.page.locator('.item-count').nth(2)).toHaveText(quantidadeProd)
     }
 
 }
