@@ -6,6 +6,7 @@ import { MinhaConta } from './actions/MinhaConta.js'
 import { Endereco } from './actions/Endereco.js'
 import { Cadastro } from './actions/Cadastro.js'
 import { Components } from './actions/Components.js'
+import { ListaDeDesejos } from './actions/listasDeDesejos.js'
 
 import { Api } from './api/apiConfig.js'
 
