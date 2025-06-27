@@ -18,6 +18,7 @@ const test = base.extend({
         context['minhaConta'] = new MinhaConta(page)
         context['endereco'] = new Endereco(page)
         context['components'] = new Components(page)
+        context['listaDeDesejos'] = new ListaDeDesejos(page)
 
         await use(context)
     },
