@@ -24,11 +24,10 @@ export class ListaDeDesejos {
         await removerProd.click()
     }
 
-    async validarAdicaoDeProduto(quantidadeProd) {
+    async validarAdicaoDeProduto() {
         await expect(this.page.locator('#swal2-title')).toHaveText('Success!')
         await expect(this.page.locator('#swal2-html-container')).toHaveText('Successfully added to your Cart')
-        await expect(this.page.locator('.item-count').nth(1)).toHaveText()
-        this.validarQuantDeProduto(quantidadeProd) 
+        await expect(this.page.locator('.item-count').nth(1)).toHaveText('4')
     }
 
     async validarQuantDeProduto(quantidadeProd) {
