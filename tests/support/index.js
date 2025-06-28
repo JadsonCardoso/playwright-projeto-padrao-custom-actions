@@ -7,6 +7,7 @@ import { Endereco } from './actions/Endereco.js'
 import { Cadastro } from './actions/Cadastro.js'
 import { Components } from './actions/Components.js'
 import { ListaDeDesejos } from './actions/ListasDeDesejos.js'
+import { CarrinhoCompras } from './actions/CarrinhoCompras.js'
 
 import { Api } from './api/apiConfig.js'
 
@@ -19,6 +20,7 @@ const test = base.extend({
         context['endereco'] = new Endereco(page)
         context['components'] = new Components(page)
         context['listaDeDesejos'] = new ListaDeDesejos(page)
+        context['carrinhoCompras'] = new CarrinhoCompras(page)
 
         await use(context)
     },
