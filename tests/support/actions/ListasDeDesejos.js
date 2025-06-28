@@ -48,6 +48,14 @@ export class ListaDeDesejos {
         await this.validarMensagemDesucesso()
     }
 
+      async aumentarQuantidadeProduto() {
+        await this.page.locator('i[class="fa fa-plus"]').click()
+    }
+
+      async removerQuantidadeProduto() {
+        await this.page.locator('i[class="fa fa-minus"]').click()
+    }
+
     async validarMensagemDesucesso() {
         await expect(this.page.locator('#swal2-title')).toHaveText('Success!')
         await expect(this.page.locator('#swal2-html-container')).toHaveText('Successfully added to your Cart')
@@ -72,5 +80,9 @@ export class ListaDeDesejos {
 
     async validarValorDoCarrinho(subtotal) {
         await expect(this.page.locator('.offcanvas-cart-total-price-value')).toHaveText(subtotal)
+    }
+
+    async validarQuantidadeProduto(quantidade){
+        await expect(this.page.locator(`input[value="${quantidade}"]`)).toBeVisible()
     }
 }

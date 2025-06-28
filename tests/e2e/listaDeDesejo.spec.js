@@ -57,3 +57,24 @@ test('Adicionando produto no carrinho via tela de detalhes do produto', async ({
     await page.listaDeDesejos.adicionarProdutoTelaDetalhes()
     await page.listaDeDesejos.validarValorDoCarrinho('$153.00')
 })
+
+test('Adicionando quantidade de produto', async ({ page }) => {
+    await page.login.fazerLogin(userEmail, '123456')
+
+    await page.listaDeDesejos.acessarListaDeDesejos()
+    await page.listaDeDesejos.acessarProdutoPelaListadeDesejos()
+    await page.listaDeDesejos.aumentarQuantidadeProduto()
+    await page.listaDeDesejos.validarQuantidadeProduto('2') // Usando para validar aumento na quantidade
+    
+})
+
+test('Removendo quantidade de produto', async ({ page }) => {
+    await page.login.fazerLogin(userEmail, '123456')
+
+    await page.listaDeDesejos.acessarListaDeDesejos()
+    await page.listaDeDesejos.acessarProdutoPelaListadeDesejos()
+    await page.listaDeDesejos.aumentarQuantidadeProduto()
+    await page.listaDeDesejos.removerQuantidadeProduto()
+    await page.listaDeDesejos.validarQuantidadeProduto('1') // Usando para validar diminuição na quantidade
+    
+})
