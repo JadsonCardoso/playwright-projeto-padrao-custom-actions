@@ -45,24 +45,25 @@ export class ListaDeDesejos {
     async adicionarProdutoTelaDetalhes() {
         const addCart = await this.page.locator('a[class="theme-btn-one btn-black-overlay btn_sm"]')
         addCart.click()
-        await this.validarMensagemDesucesso()
     }
 
-      async aumentarQuantidadeProduto() {
+    async aumentarQuantidadeProduto() {
         await this.page.locator('i[class="fa fa-plus"]').click()
     }
 
-      async removerQuantidadeProduto() {
+    async adicionarProdutosCarrinho(subtotal) {
+        await this.page.getByText('Add to cart').first().click()
+        await expect(this.page.locator('.item-count').nth(1)).toHaveText('4')
+        await this.page.locator('.item-count').nth(1).click()
+        await expect(this.page.locator('a[href="/product-details-one/2"]').nth(1)).toHaveText('T-Shirt For Men')
+        await this.validarValorDoCarrinho(subtotal)
+    }
+
+    async removerQuantidadeProduto() {
         await this.page.locator('i[class="fa fa-minus"]').click()
     }
 
-    async validarMensagemDesucesso() {
-        await expect(this.page.locator('#swal2-title')).toHaveText('Success!')
-        await expect(this.page.locator('#swal2-html-container')).toHaveText('Successfully added to your Cart')
-    }
-
     async validarAdicaoDeProduto(subtotal) {
-        await this.validarMensagemDesucesso()
         await expect(this.page.locator('.item-count').nth(1)).toHaveText('4')
         await this.page.locator('.item-count').nth(1).click()
         await this.validarValorDoCarrinho(subtotal)
@@ -82,7 +83,7 @@ export class ListaDeDesejos {
         await expect(this.page.locator('.offcanvas-cart-total-price-value')).toHaveText(subtotal)
     }
 
-    async validarQuantidadeProduto(quantidade){
+    async validarQuantidadeProduto(quantidade) {
         await expect(this.page.locator(`input[value="${quantidade}"]`)).toBeVisible()
     }
 }

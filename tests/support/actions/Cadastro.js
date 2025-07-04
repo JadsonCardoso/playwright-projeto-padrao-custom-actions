@@ -7,7 +7,7 @@ export class Cadastro {
     }
 
     async acessarCadastro() {
-        await this.page.goto('https://automationpratice.com.br/register')
+        await this.page.goto('/register')
 
         const cadastroForm = this.page.locator('.account_form')
         await expect(cadastroForm).toBeVisible()
@@ -24,12 +24,7 @@ export class Cadastro {
         await this.page.locator('#btnRegister').click()
     }
 
-    async validarCadastroSucesso(nome) {
-        await this.page.waitForLoadState('networkidle')
-        await expect(this.page.locator('#swal2-title')).toHaveText('Cadastro realizado!')
-        await expect(this.page.locator('#swal2-html-container')).toHaveText(`Bem-vindo ${nome}`)
-        await this.clicarEmOk()
-
+    async cadastroSucesso(nome) {
         const logueUser = this.page.locator('#userLogged')
         await expect(logueUser).toContainText(nome)
     }

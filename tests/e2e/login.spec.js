@@ -10,7 +10,8 @@ test('Login válido', async ({ page }) => {
     await page.login.acessarLogin()
     await page.login.preencherCampos(userEmail, '123654')
     await page.login.clicarBotaoLogin()
-    await page.login.validarSucesso('Login realizado', `Olá, ${userEmail}`)
+    await page.components.sucesso('Login realizado', `Olá, ${userEmail}`)
+    await page.components.clicarEmOk()
 })
 
 test('Login sem preencher campos', async ({ page }) => {
@@ -47,5 +48,16 @@ test('Após falha de login, deve ser  possível login após preencher campos com
     // Tentativa de logim com após falha
     await page.login.preencherCampos(userEmail, '123654')
     await page.login.clicarBotaoLogin()
-    await page.login.validarSucesso('Login realizado', `Olá, ${userEmail}`)
+    await page.components.sucesso('Login realizado', `Olá, ${userEmail}`)
 })
+
+test('Realizar Logout', async ({ page }) => {
+    const userEmail = faker.internet.email();
+
+    await page.login.fazerLogin(userEmail, '123456')
+
+    await page.components.logout()
+    await page.components.sucesso('Logout realizado', 'Obrigado, e volte sempre!')
+
+})
+

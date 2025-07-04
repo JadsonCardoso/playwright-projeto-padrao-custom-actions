@@ -4,6 +4,4 @@ export class MinhaConta {
   constructor(page) {
     this.page = page
   }
-
-
 }

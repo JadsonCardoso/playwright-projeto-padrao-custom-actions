@@ -30,6 +30,7 @@ test('Acessando produto adicionados no Carrinho', async ({ page }) => {
 
     await page.listaDeDesejos.acessarPaginaDeDesejos()
     await page.listaDeDesejos.adicionarProdutoCarrinho()
+    await page.components.sucesso('Success!', 'Successfully added to your Cart')
     await page.listaDeDesejos.validarAdicaoDeProduto('$153.00')
 })
 
@@ -55,6 +56,7 @@ test('Adicionando produto no carrinho via tela de detalhes do produto', async ({
     await page.listaDeDesejos.acessarListaDeDesejos()
     await page.listaDeDesejos.acessarProdutoPelaListadeDesejos()
     await page.listaDeDesejos.adicionarProdutoTelaDetalhes()
+    await page.components.sucesso('Success!', 'Successfully added to your Cart')
     await page.listaDeDesejos.validarValorDoCarrinho('$153.00')
 })
 

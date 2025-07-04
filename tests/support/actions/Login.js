@@ -14,7 +14,7 @@ export class Login {
     }
 
     async acessarLogin() {
-        await this.page.goto('https://automationpratice.com.br/login');
+        await this.page.goto('/login');
         await expect(this.page.locator('#btnLogin')).toHaveText('login')
     }
 
@@ -31,10 +31,6 @@ export class Login {
         await expect(this.page.locator('//span[@class="invalid_input"]')).toHaveText(mensagemError)
     }
 
-    async validarSucesso(mensagemSucesso, validarEmail) {
-        await expect(this.page.locator('#swal2-title')).toHaveText(mensagemSucesso)
-        await expect(this.page.locator('#swal2-html-container')).toHaveText(validarEmail)
-    }
 
     async clicarEmOk() {
         await this.page.getByText('OK').click()

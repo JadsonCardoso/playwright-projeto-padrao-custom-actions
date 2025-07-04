@@ -7,7 +7,22 @@ export class Components {
         this.page = page
     }
 
-    async validarMensagemError(texto) {
+    async mensagemError(texto) {
         await expect(this.page.locator('.errorLabel')).toHaveText(texto)
+    }
+
+    async logout() {
+        await this.page.locator('.right_list_fix .after_login').hover() // Mover Mouse para o elemento
+        await this.page.locator('.custom_dropdown a[href="/my-account#!"]').click()
+    }
+    
+    async sucesso(titulo, texto) {
+        await expect(this.page.locator('#swal2-title')).toHaveText(titulo)
+        await expect(this.page.locator('#swal2-html-container')).toHaveText(texto)
+    }
+
+    
+    async clicarEmOk() {
+        await this.page.getByText('OK').click()
     }
 }

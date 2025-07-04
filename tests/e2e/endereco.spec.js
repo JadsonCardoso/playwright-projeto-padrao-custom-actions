@@ -22,7 +22,7 @@ test('Não dever cadastrar se os campos não forem preenchidos', async ({ page }
     await page.endereco.acessarCadastroEndereco()
     await page.endereco.salvar()
 
-    await page.components.validarMensagemError([
+    await page.components.mensagemError([
         'O campo First Name deve ser prenchido',
         'O campo Last Name deve ser prenchido',
         'O campo Company deve ser prenchido',
