@@ -14,12 +14,12 @@ export class ListaDeDesejos {
             .toHaveText('Boho Tops for Girls')
     }
 
-    async adicionarProdutoCarrinho() {
+    async adicionarProdCarrinho() {
         const addCart = await this.page.locator('.product_addcart button[type="button"]').first()
-        await addCart.click();
+        await addCart.click()
     }
 
-    async removerProduto() {
+    async removerProdDaPagDesejos() {
         const removerProd = await this.page.locator('.product_remove i[style="cursor: pointer;"]').nth(1)
         await removerProd.click()
     }
@@ -30,7 +30,7 @@ export class ListaDeDesejos {
         await expect(this.page.getByText('View wishlist')).toBeVisible()
     }
 
-    async acessarProdutoPelaListadeDesejos() {
+    async acessarProdPelaListadeDesejos() {
         await this.page.locator('a[href="/product-details-one/9"]').nth(1)
             .getByText('Boho Tops for Girls').click()
 
@@ -42,7 +42,7 @@ export class ListaDeDesejos {
         await this.page.locator('.customs_sel_box').selectOption({ value: modelo });
     }
 
-    async adicionarProdutoTelaDetalhes() {
+    async adicionarProdNoCarrinhoTelaDetalhes() {
         const addCart = await this.page.locator('a[class="theme-btn-one btn-black-overlay btn_sm"]')
         addCart.click()
     }
@@ -63,7 +63,7 @@ export class ListaDeDesejos {
         await this.page.locator('i[class="fa fa-minus"]').click()
     }
 
-    async validarAdicaoDeProduto(subtotal) {
+    async validarAdicaoDeProdCarrinho(subtotal) {
         await expect(this.page.locator('.item-count').nth(1)).toHaveText('4')
         await this.page.locator('.item-count').nth(1).click()
         await this.validarValorDoCarrinho(subtotal)
@@ -71,13 +71,12 @@ export class ListaDeDesejos {
     }
 
 
-    async validarRemocaoProduto(quantidadeProd) {
+    async validarRemocaoProdListaDeDesejos(quantidadeProd) {
         await expect(this.page.getByText('Skater Dress')).toBeHidden()
         await expect(this.page.locator('.item-count').nth(2)).toHaveText(quantidadeProd)
         await this.page.locator('a[href="#offcanvas-wishlish"] .item-count').nth(0).click()
         await expect(this.page.getByText('Skater Dress')).toBeHidden()
     }
-
 
     async validarValorDoCarrinho(subtotal) {
         await expect(this.page.locator('.offcanvas-cart-total-price-value')).toHaveText(subtotal)
